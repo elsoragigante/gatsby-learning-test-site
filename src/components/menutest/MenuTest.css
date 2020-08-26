@@ -1,0 +1,9 @@
+.side-menu {
+    border: 1px solid black;
+    width: 20%;
+}
+
+.menu-button {
+    list-style-type: none;
+    border: 1px solid red;
+}
