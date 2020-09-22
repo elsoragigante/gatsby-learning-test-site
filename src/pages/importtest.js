@@ -1,8 +1,13 @@
 import React from "react"
+import { graphql } from 'gatsby'
 import MenuTest from "../components/menutest/MenuTest"
+import Cards from "../components/cards/Cards"
 
 const ImportTest = ({ data }) => (
-    <MenuTest data={data} />
+    <div>
+        <MenuTest data={data} />
+        <Cards />
+    </div>
   )
   
   export default ImportTest

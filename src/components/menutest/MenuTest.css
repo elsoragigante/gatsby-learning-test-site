@@ -1,6 +1,8 @@
 .side-menu {
     border: 1px solid black;
     width: 20%;
+    display: block;
+    float: left;
 }
 
 .menu-button {

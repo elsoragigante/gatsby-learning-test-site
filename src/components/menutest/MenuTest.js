@@ -1,5 +1,7 @@
 import React from "react";
-import "./MenuTest.css"
+import { Link } from 'gatsby';
+import "./MenuTest.css";
+
 
 var monthNames = {
     "January": 1,
@@ -22,6 +24,7 @@ class MenuTest extends React.Component {
         const directoriesArr = obj.data.allFile.edges.map(obj => {
             return obj.node.relativeDirectory;
         });
+        console.log(directoriesArr)
 
         //split directories based on naming convention
         const dirSplitOne = directoriesArr.map(str => str.split("/"))
@@ -55,7 +58,11 @@ class MenuTest extends React.Component {
 
         //convert strings to jsx
         const dirsHTML = uniqDirsArr.map(str => {
-                return <li className="menu-button">{str}</li>            
+                return (
+                    <Link to="/">
+                        <li className="menu-button">{str}</li> 
+                    </Link>
+                )        
         })
 
         return dirsHTML

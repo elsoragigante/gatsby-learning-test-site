@@ -1,0 +1,7 @@
+.cards {
+    border: 1px solid black;
+    width: 70%;
+    display: block;
+    float: left;
+    margin-left: 20px;
+}
