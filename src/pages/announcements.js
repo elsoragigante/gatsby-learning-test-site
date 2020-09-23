@@ -6,7 +6,7 @@ import Cards from "../components/cards/Cards"
 const Announcements = ({ data }) => (
     <div>
         <MenuTest data={data} />
-        <Cards />
+        <Cards data={data} />
     </div>
   )
   
@@ -23,5 +23,17 @@ query MyQuery {
             }
         }
     }
-    }
+    allMarkdownRemark {
+        edges {
+          node {
+            id
+            html
+            frontmatter {
+              date
+              title
+            }
+          }
+        }
+      }
+}
 `

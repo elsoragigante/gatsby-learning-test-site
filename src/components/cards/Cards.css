@@ -5,3 +5,7 @@
     float: left;
     margin-left: 20px;
 }
+
+.markdown-page-test {
+    border: 1px solid red;
+}

@@ -56,8 +56,6 @@ class MenuTest extends React.Component {
         stringDirsFinal.forEach(a => uniqDirsSet.add(a))
         let uniqDirsArr = Array.from(uniqDirsSet)
 
-        console.log(uniqDirsArr)
-
         //build the links array
         const linksArr = uniqDirsArr.map(dir => {
             const year = dir.split(" ")[1]
@@ -72,7 +70,6 @@ class MenuTest extends React.Component {
             const monthName = dir.split(" ")[0]
             return `${year}/${monthNum}-${monthName}`
         })
-        console.log(linksArr)
 
         //convert strings to jsx
         const dirsHTML = uniqDirsArr.map((str, index) => {
@@ -82,7 +79,7 @@ class MenuTest extends React.Component {
                     </Link>
                 )        
         })
-        console.log(dirsHTML[0])
+
         return dirsHTML
     }
 
