@@ -3,14 +3,14 @@ import { graphql } from 'gatsby'
 import MenuTest from "../components/menutest/MenuTest"
 import Cards from "../components/cards/Cards"
 
-const ImportTest = ({ data }) => (
+const Announcements = ({ data }) => (
     <div>
         <MenuTest data={data} />
         <Cards />
     </div>
   )
   
-  export default ImportTest
+  export default Announcements
 
 export const query = graphql`
 query MyQuery {

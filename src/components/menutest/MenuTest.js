@@ -24,7 +24,7 @@ class MenuTest extends React.Component {
         const directoriesArr = obj.data.allFile.edges.map(obj => {
             return obj.node.relativeDirectory;
         });
-        console.log(directoriesArr)
+        
 
         //split directories based on naming convention
         const dirSplitOne = directoriesArr.map(str => str.split("/"))
@@ -56,15 +56,33 @@ class MenuTest extends React.Component {
         stringDirsFinal.forEach(a => uniqDirsSet.add(a))
         let uniqDirsArr = Array.from(uniqDirsSet)
 
+        console.log(uniqDirsArr)
+
+        //build the links array
+        const linksArr = uniqDirsArr.map(dir => {
+            const year = dir.split(" ")[1]
+            let monthNum = monthNames[dir.split(" ")[0]]
+
+            if(monthNum <= 9){
+                monthNum = `0${monthNum}`
+            } else {
+                monthNum = `${monthNum}`
+            }
+
+            const monthName = dir.split(" ")[0]
+            return `${year}/${monthNum}-${monthName}`
+        })
+        console.log(linksArr)
+
         //convert strings to jsx
-        const dirsHTML = uniqDirsArr.map(str => {
+        const dirsHTML = uniqDirsArr.map((str, index) => {
                 return (
-                    <Link to="/">
+                    <Link to={linksArr[index]}>
                         <li className="menu-button">{str}</li> 
                     </Link>
                 )        
         })
-
+        console.log(dirsHTML[0])
         return dirsHTML
     }
 
