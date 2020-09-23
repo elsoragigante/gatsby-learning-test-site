@@ -15,25 +15,25 @@ const Announcements = ({ data }) => (
 export const query = graphql`
 query MyQuery {
     allFile(filter: {sourceInstanceName: {eq: "pages"}}) {
-        edges {
-            node {
-                name
-                relativeDirectory
-                relativePath
-            }
+      edges {
+        node {
+          name
+          relativeDirectory
+          relativePath
         }
+      }
     }
-    allMarkdownRemark {
-        edges {
-          node {
-            id
-            html
-            frontmatter {
-              date
-              title
-            }
+    allMarkdownRemark(sort: {order: DESC, fields: frontmatter___date}) {
+      edges {
+        node {
+          id
+          html
+          frontmatter {
+            date
+            title
           }
         }
       }
-}
+    }
+  }
 `
