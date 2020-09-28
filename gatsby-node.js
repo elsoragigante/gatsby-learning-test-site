@@ -16,18 +16,31 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const yearsPageTemplate = path.resolve(`src/templates/years-pages.js`)
   const monthsPageTemplate = path.resolve(`src/templates/months-pages.js`)
+  const markdownPageTemplate = path.resolve(`src/templates/markdown-pages.js`)
   const result = await graphql(`
-    query MyQuery {
+      query MyQuery {
         allFile(filter: {sourceInstanceName: {eq: "pages"}}) {
-            edges {
-                node {
-                    name
-                    relativeDirectory
-                    relativePath
-                }
+          edges {
+            node {
+              name
+              relativeDirectory
+              relativePath
             }
+          }
         }
-    }
+        allMarkdownRemark(sort: {order: DESC, fields: frontmatter___date}) {
+          edges {
+            node {
+              id
+              html
+              frontmatter {
+                date
+                title
+              }
+            }
+          }
+        }
+      }
     `)
 
   //years pages
@@ -48,12 +61,34 @@ exports.createPages = async ({ graphql, actions }) => {
   ])
 
   //months pages
-  result.data.allFile.edges.forEach(edge => {
+  
+
+  result.data.allMarkdownRemark.edges.forEach(edge => {
+    const date = edge.node.frontmatter.date.split("-")
+
     createPage({
-      path: `announcements/${edge.node.relativeDirectory}`,
+      path: `announcements/${date[0]}/${date[1]}`,
       component: monthsPageTemplate,
       context: {
-        title: edge.node.name,
+        title: edge.node.frontmatter.title,
+      },
+    })
+  })
+
+  //markdown pages
+  //path...node.frontmatter.date...format to year/month/markdown title
+  //2020-05-01
+  result.data.allMarkdownRemark.edges.forEach(edge => {
+    const date = edge.node.frontmatter.date.split("-")
+
+    const { title } = edge.node.frontmatter
+
+    createPage({
+      path: `announcements/${date[0]}/${date[1]}/${title}`,
+      component: markdownPageTemplate,
+      context: {
+        title: edge.node.frontmatter.title,
+        html: edge.node.html
       },
     })
   })

@@ -1,10 +1,24 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import './Cards.css'
 
 class Cards extends React.Component {
     markdownPages() {
+
         const markdown = this.props.data.allMarkdownRemark.edges.map(edge => {
-            return <p className="markdown-page-test">{edge.node.frontmatter.title}</p>
+            const date = edge.node.frontmatter.date.split("-")
+            const title = edge.node.frontmatter.title
+
+            return (
+                <div>
+                    <Link 
+                        className="markdown-page-test" 
+                        to={`http://localhost:8000/announcements/${date[0]}/${date[1]}/${title}`}
+                    >
+                        {edge.node.frontmatter.title}
+                    </Link>
+                </div>
+            )
         })
 
         console.log(markdown)

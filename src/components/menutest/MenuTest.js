@@ -68,7 +68,7 @@ class MenuTest extends React.Component {
             }
 
             const monthName = dir.split(" ")[0]
-            return `${year}/${monthNum}-${monthName}`
+            return `http://localhost:8000/announcements/${year}/${monthNum}`
         })
 
         //convert strings to jsx
