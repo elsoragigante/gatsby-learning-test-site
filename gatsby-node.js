@@ -65,13 +65,18 @@ exports.createPages = async ({ graphql, actions }) => {
 
   result.data.allMarkdownRemark.edges.forEach(edge => {
     const date = edge.node.frontmatter.date.split("-")
+    const queryDate = `${date[0]}-${date[1]}`
+    const queryDatePlusOne = `${date[0]}-${date[1] + 1}`
 
     createPage({
       path: `announcements/${date[0]}/${date[1]}`,
       component: monthsPageTemplate,
       context: {
         title: edge.node.frontmatter.title,
-      },
+        date: date,
+        queryDate: queryDate,
+        queryDatePlusOne: queryDatePlusOne
+      }
     })
   })
 
